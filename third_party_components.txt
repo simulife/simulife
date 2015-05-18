@@ -3,3 +3,8 @@ This software includes the following third party software components.
 Copies of the licenses can be found in the folder third_party_components_licenses. 
 To obtain additional materials regarding these packages, please contact us per contact information at www.b-prog.org. 
 
+Three.js        https://github.com/mrdoob/three.js/                                 License: The MIT License
+ThreeCSG.js     https://github.com/chandlerprall/ThreeCSG                           License: The MIT License
+Dwr             http://directwebremoting.org/                                       License: Apache Software License v2
+Commons Logging http://commons.apache.org/proper/commons-logging/                   License: Apache Software License v2
+ExtJs           http://www.sencha.com/legal/sencha-sdk-software-license-agreement/  License: Sencha SDK Software License Agreement
