@@ -1,0 +1,5 @@
+This software includes the following third party software components. 
+
+Copies of the licenses can be found in the folder third_party_components_licenses. 
+To obtain additional materials regarding these packages, please contact us per contact information at www.b-prog.org. 
+
