@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+  <!-- Servlets -->
+	<!-- servlet>
+		<servlet-name>SimulifeWebApp</servlet-name>
+		<servlet-class>simulife.server.SimulifeWebAppServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SimulifeWebApp</servlet-name>
+		<url-pattern>/simulifeweb/simulife</url-pattern>
+	</servlet-mapping-->
+	  
+	<servlet>
+	  <display-name>DWR Servlet</display-name>
+	  <servlet-name>dwr-invoker</servlet-name>  
+	  <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+            <param-value>false</param-value>
+		</init-param> 
+        <init-param> 
+        	<param-name>logLevel</param-name> 
+            <param-value>FATAL</param-value> 
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>dwr-invoker</servlet-name>
+	  <url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>	  
+	  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>simulifeExt.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>

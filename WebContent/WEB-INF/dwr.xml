@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.org/dwr/dwr20.dtd"> 
+ 
+<dwr>
+  <allow>
+    <create creator="new" javascript="JDate">
+      <param name="class" value="java.util.Date"/>
+    </create>
+    <create creator="new" javascript="NewObjectsGetter" scope="application">
+      <param name="class" value="simulife.server.NewObjectsGetter"/>
+    </create>
+    <create creator="new" javascript="ModelInvoker" scope="application">
+      <param name="class" value="simulife.server.model.ModelInvoker"/>
+    </create>
+    <create creator="new" javascript="SocketHandler" scope="application">
+      <param name="class" value="simulife.server.socket.SocketHandler"/>
+    </create>
+    
+	<convert converter="map" match="java.util.Map">
+  		<param name="nullKey" value="null"/>
+	</convert>    
+    <convert converter="bean" match="simulife.server.GuiObject"/>   
+    
+  </allow>
+</dwr>

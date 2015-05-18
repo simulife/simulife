@@ -1,0 +1,138 @@
+
+	//Vars
+	var vegfRadiuses = new Array();
+	var oxygenRadiuses = new Array();
+	var threshold = 0.1;	//10%
+	
+	var vegfpMaterial =
+    	new THREE.ParticleBasicMaterial({
+    		color: 0xFFFF00,	//Yellow
+    		size: 3, 
+    		 map: THREE.ImageUtils.loadTexture(
+   				 "images/oxygen.png"
+    		 ),
+    		 blending: THREE.AdditiveBlending,
+    		 transparent: true
+    		 //,transparent: true, opacity:0.8
+    });
+	
+	var oxygenpMaterial =
+    	new THREE.ParticleBasicMaterial({
+    		color: 0x0088FF,	//blue
+    		size: 1,
+   		 	map: THREE.ImageUtils.loadTexture(
+   				 "images/oxygen.png"
+   		 	),
+   		 	blending: THREE.AdditiveBlending,
+   		 	transparent: true
+    		//transparent: true, opacity:0.1
+    });
+	
+	var particle, particles, point, i; 
+	//=====
+
+	//moleculesRadiusInit
+	function moleculesRadiusInit()
+	{
+		vegfRadiuses = new Array();
+		oxygenRadiuses = new Array();
+	}
+	
+	//createOxygenRadius
+	function createOxygenRadius(radius,amount,type)
+	{
+		amount=amount/10;
+		createRadius(radius,amount,type, oxygenRadiuses, oxygenpMaterial, "Oxygen");
+	}
+	
+	//createVegfRadius
+	function createVegfRadius(radius, amount, type)
+	{
+		amount=amount/10;
+		createRadius(radius,amount,type, vegfRadiuses, vegfpMaterial, "Vegf");
+	}
+	
+	//createRadius
+	function createRadius(radius,amount,type, radiusArray, pMaterial, type)
+	{
+		//create "amount" random particles at a specific radius
+		if(radiusArray[radius]==null || amountThresholdExeeds(radius,amount, radiusArray))
+		{
+			if(radiusArray[radius]!=null){
+				scene.remove(radiusArray[radius]);	//remove previous particleSystem
+			}
+			radiusArray[radius] = createRandomPoints(radius, amount, pMaterial, type);
+		}
+	}
+	
+	//amountThresholdExeeds
+	function amountThresholdExeeds(radius,newAmt, radiusArray)
+	{
+		var existingAmt = radiusArray[radius].geometry.vertices.length;
+		var diff;
+		
+		if(existingAmt>newAmt){
+			diff = existingAmt-newAmt;
+		}else{
+			diff = newAmt-existingAmt;
+		}
+		var diffPerc = diff/existingAmt;
+		if(diffPerc>threshold){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	//randomPoint - returns a value between -1 and 1
+	function randomPoint()
+	{
+	    var x = Math.random() - 0.5, y = Math.random() - 0.5, z = Math.random() - 0.5;
+	    var k = Math.sqrt(x*x + y*y + z*z);
+	    while (k < 0.2 || k > 0.3)
+	    {
+	        x = Math.random() - 0.5;
+	        y = Math.random() - 0.5;
+	        z = Math.random() - 0.5;
+	        k = Math.sqrt(x*x + y*y + z*z);
+	    }
+	    return {x:x/k, y:y/k, z:z/k};
+	}
+	
+	//createRandomPoints
+	function createRandomPoints(radius, numOfPoints, pMaterial, type)
+	{
+		particles = new THREE.Geometry();
+		
+		//var fractSphere = new THREE.Mesh( fractGeom,  fractMaterial );
+
+		var i=0;
+	    for (i=0; i<numOfPoints; i++){
+	    	point = randomPoint();
+	    
+			var vertex = new THREE.Vector3();
+			vertex.x = point.x*radius*GUI_SIZE_MULTIPLIER;
+			vertex.y = point.y*radius*GUI_SIZE_MULTIPLIER;
+			vertex.z = point.z*radius*GUI_SIZE_MULTIPLIER; 
+
+			particles.vertices.push( vertex );
+	    }
+	    
+		particleSystem =
+			  new THREE.ParticleSystem(
+			    particles,
+			    pMaterial);
+
+		particleSystem.type = type;
+		if(Ext.getCmp(type).checked==true){
+			particleSystem.visible = true;
+		}else{
+			particleSystem.visible = false;
+		}
+		
+		// add it to the scene
+		scene.add(particleSystem);
+		
+		return particleSystem;
+	}	
+

@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html lang="en"> 
+<head>
+	<title>Simulife</title> 
+    <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
+    
+    <!-- extJs --> 
+    <!-- script type="text/javascript" src="extjs/ext-debug.js"></script--> 
+    <script type="text/javascript" src="extjs/ext-all.js"></script> 
+    
+	<!-- threeJs --> 
+	<!-- script src="three/threeRev54.js"></script-->
+	<!-- script src="three/three.min.56.js"></script-->
+	<script src="three/three.56.js"></script>
+	
+	<script src="three/FlyControls.js"></script>
+	<script src="three/TrackballControls.js"></script>
+	<script src="three/ColladaLoader.js"></script>
+	
+	<!-- script src="three/stats.min.js"></script-->
+	<script src="three/stats.js"></script>
+	<script src="three/RequestAnimationFrame.js"></script>
+	
+	<!-- script src="https://raw.github.com/mrdoob/three.js/r44/examples/js/RequestAnimationFrame.js"></script>
+	<script src="https://raw.github.com/mrdoob/three.js/r44/examples/js/Stats.js"></script-->    
+
+	<!-- script type='text/javascript' src='js/TrackballControls.js'></script-->
+	<!-- script type='text/javascript' src='js/PerspectiveCamera.js'></script--> 
+			
+	<!-- DWR -->
+	<script type='text/javascript' src='/SimuLifeWebApp/dwr/engine.js'></script>
+  	<script type='text/javascript' src='/SimuLifeWebApp/dwr/util.js'></script> 		
+	<script type='text/javascript' src='/SimuLifeWebApp/dwr/interface/NewObjectsGetter.js'></script>
+	<script type='text/javascript' src='/SimuLifeWebApp/dwr/interface/ModelInvoker.js'></script>
+	<script type='text/javascript' src='/SimuLifeWebApp/dwr/interface/SocketHandler.js'></script>
+				
+	<!-- Simulife --> 
+	<script type='text/javascript' src='js/simulifeConstants.js'></script>
+	<script type='text/javascript' src='js/simulifeParameters.js'></script>
+	<script type='text/javascript' src='js/globalVariables.js'></script>
+	
+	<script type='text/javascript' src='js/appPanels/leftPanel.js'></script>
+	<script type='text/javascript' src='js/appPanels/rightPanel.js'></script>
+	<!-- script type='text/javascript' src='js/appPanels/leftLowerPanel.js'></script-->
+
+	<script type='text/javascript' src='js/objectHandlers/graphicObjects.js'></script>
+	<script type='text/javascript' src='js/objectHandlers/objectsHandler.js'></script>
+	<script type='text/javascript' src='js/objectHandlers/objectCreator.js'></script>
+	<script type='text/javascript' src='js/objectHandlers/objectDetailsHandler.js'></script>	
+	<script type='text/javascript' src='js/objectHandlers/objectMover.js'></script>
+	<script type='text/javascript' src='js/objectHandlers/objectRemover.js'></script>
+	<script type='text/javascript' src='js/objectHandlers/objectBranching.js'></script>
+	<script type='text/javascript' src='js/objectHandlers/objectsVisibilityHandler.js'></script>
+	<script type='text/javascript' src='js/objectHandlers/objectsAppearanceHandler.js'></script>
+
+	<script type='text/javascript' src='js/appPanels/centerPanel.js'></script>
+	
+	<script type='text/javascript' src='js/generalHandlers/animationHandler.js'></script>
+	<!-- script type='text/javascript' src='js/generalHandlers/colladaHandler.js'></script-->
+	<script type='text/javascript' src='js/generalHandlers/fileHandler.js'></script>
+	<script type='text/javascript' src='js/generalHandlers/colorHandler.js'></script>
+	
+	<script type='text/javascript' src='js/generalHandlers/slicingHandler.js'></script>
+	<script type='text/javascript' src='js/generalHandlers/rotationHandler.js'></script>
+	<script type='text/javascript' src='js/generalHandlers/objectsGetter.js'></script>
+ 
+	<script type='text/javascript' src='js/molecules/moleculesRadius.js'></script>
+	<script type='text/javascript' src='js/molecules/moleculesGroups.js'></script> 
+	<script type='text/javascript' src='js/cells/tumor.js'></script>
+	<script type='text/javascript' src='js/cells/endothelial.js'></script>
+	<script type='text/javascript' src='js/cells/fibroblast.js'></script>
+
+	<script type='text/javascript' src='js/objectPicking.js'></script>
+	<script type='text/javascript' src='js/appPanels/footerPanel.js'></script>
+	<script type='text/javascript' src='js/utils.js'></script>
+	<script type='text/javascript' src='js/csg/csg.js'></script>
+	<script type='text/javascript' src='js/csg/ThreeCSG.js'></script>
+
+	<script type='text/javascript' src='js/actions/sendRuntimeParameters.js'></script>
+	<script type='text/javascript' src='js/actions/fileActions.js'></script>
+	<script type='text/javascript' src='js/actions/startJava.js'></script>
+	<script type='text/javascript' src='js/actions/startSimulife.js'></script>
+	<script type='text/javascript' src='js/actions/stopSimulife.js'></script>
+	<script type='text/javascript' src='js/actions/cellsActions.js'></script>
+	
+	<!-- script type='text/javascript' src='js/tests/tests.js'></script-->
+	<!-- script type='text/javascript' src='js/tests/testCell.js'></script>
+	<script type='text/javascript' src='js/tests/testCell2.js'></script-->
+	
+	<!-- script src="https://raw.github.com/benvanik/WebGL-Inspector/master/core/embed.js"></script -->
+	
+	<!-- Charts --> 
+	<script type='text/javascript' src='js/charts/cellPercentageChart.js'></script>
+	<script type='text/javascript' src='js/charts/amountVsTimeChart.js'></script>
+	<script type='text/javascript' src='js/charts/globalAmounts.js'></script>
+    
+</head>
+<body>
+
+	<div id="info">
+		<span id="generationMsg"></span>
+	</div>
+	
+	<script type="text/javascript">
+	
+		Ext.require('Ext.container.Viewport');
+		Ext.require('Ext.tab.*');
+		Ext.require('Ext.chart.*');
+		Ext.require(['Ext.Window', 'Ext.fx.target.Sprite', 'Ext.layout.container.Fit']);
+		
+		var leftPanelWidht = 250;
+		//var leftPanelWidht = 500;
+		
+		var rightPanelWidht = 210;
+		
+		var footerHeight = 220;
+		
+		Ext.application({
+		    name: 'Simulife Ext',
+		    launch: function() {
+		    	
+		    	Ext.create('Ext.Viewport', {
+		        	layout:'border',
+		        	id:'viewPort1',
+		        	defaults: {
+		        	    collapsible: true,
+		        	    split: true
+		        	    //bodyStyle: 'padding:15px'
+		        	},
+		        	items: [{
+		        		//FOOTER
+		        		xtype : 'panel',
+		        	    title: 'Statistics',
+		        	    id: 'footer1',
+		        	    collapsible: true,
+		        	    //collapsed: true,
+		        	    region: 'south',
+		        	    height: footerHeight,
+		        	    minSize: footerHeight, maxSize: footerHeight,
+		        	    cmargins: '5 0 0 0',
+		        	    listeners: {
+		        	    	collapse: function( p, eOpts ){
+		        	    		resize();
+		        	        },
+		        	    	expand: function( p, eOpts ){
+		        	    		resize();
+		        	        }
+		        	    }		        	    
+		        	},
+		        	{
+						//LEFT PANEL
+			            region: 'west',
+			            layout: 'border',
+			            id: 'west1', 
+			            width: leftPanelWidht,
+		        	    collapsible: true,
+		        	    //collapsed: true,
+			            border: false,
+		        	    listeners: {
+		        	    	collapse: function( p, eOpts ){
+		        	    		resize();
+		        	        },
+		        	    	expand: function( p, eOpts ){
+		        	    		resize();
+		        	        }
+		        	    }		        	    
+			        },
+		        	{
+						//RIGHT PANEL
+			            region: 'east',
+			            layout: 'border',
+			            id: 'east1', 
+			            width: rightPanelWidht,
+		        	    collapsible: true,
+		        	    //collapsed: true,
+			            border: false,
+		        	    listeners: {
+		        	    	collapse: function( p, eOpts ){
+		        	    		resize();
+		        	        },
+		        	    	expand: function( p, eOpts ){
+		        	    		resize();
+		        	        }
+		        	    }		        	    
+			        },
+					
+		        	{
+		        		//CENTER PANEL
+		        		xtype : 'panel',
+		        		layout : 'fit', 
+		        	    title: 'Simulife Animation',
+		        	    id: 'center1',
+		        	    collapsible: false,
+		        	    region:'center',
+		        	    margins: '5 0 0 0'
+		        	}]        	
+		        });
+		
+		    	//onReady
+		        Ext.onReady(function() 
+		       	{ 
+		        	createFooter();
+		        	createLeftPanel();
+					createRightPanel();
+		        	//createLeftLowerPanel();
+		        	createCenterPanel();
+		        });   	
+		 			
+		    }
+	     });
+
+		//resize
+		function resize()
+		{
+    		centerv = Ext.getCmp('center1'); 
+
+    		var SCREEN_WIDTH = centerv.body.dom.clientWidth;
+    		var SCREEN_HEIGHT = centerv.body.dom.clientHeight;	
+    		
+    		//make it square
+    		if(SCREEN_WIDTH < SCREEN_HEIGHT){
+    			SCREEN_HEIGHT = SCREEN_WIDTH; 
+    		}else{
+    			SCREEN_WIDTH = SCREEN_HEIGHT;
+    		}
+    		if(renderer!=null){
+    			renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+    		}		        	    		
+		}
+		</script>
+        
+</body>
+   
+</html>
