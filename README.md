@@ -7,4 +7,8 @@ Simulife can receive input from a model, as well as send information to the mode
 
 # Setting up a development environment
 
-
+- Download simulife source files
+- Pack it as a war file
+  - can be done by importing it to Eclipse IDE for Java EE Developers and then choose Export -> WAR file
+- Deploy it on a web server
+  - can be deployed on Tomcat7 by placing the war file in tomcat webapps folder
